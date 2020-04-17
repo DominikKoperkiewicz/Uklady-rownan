@@ -16,13 +16,26 @@ class Macierz {
 
   public:
 
-    Macierz();
-    //Macierz(const Wektor & tabl[]);
+    Macierz(); //Jednostkowa
+    Macierz(Wektor* tab);
     Macierz(Wektor A, Wektor B, Wektor C);
 
-    const Wektor & operator[] (int index) const;
+    Macierz & operator += (const Macierz & M);
+    Macierz & operator -= (const Macierz & M);
+    Macierz operator+ (const Macierz & M) const;
+    Macierz operator- (const Macierz & M) const;
+    Macierz operator* (const double l) const;
+    Wektor operator* (const Wektor W) const;
+    Macierz operator/ (const double l) const;
+
+    const Macierz transponowana() const;
+    const double wyznacznik() const; //metoda Gaussa
+    const Macierz odwrotna() const;
+
+    const Wektor & operator[] (int index) const; //element - M[wiersz][kolumna]
     Wektor & operator[] (int index);
 };
+
 
 
 /*

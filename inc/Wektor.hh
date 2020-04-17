@@ -24,11 +24,12 @@ class Wektor {
       Wektor(double tablica[]);
 
       Wektor & operator += (const Wektor & W2); //W1 += W2  , W1 += W3 += W4
-      const Wektor operator + (const Wektor & W2) const; //W1 + W2
-      const Wektor operator - (const Wektor & W2) const;
+      Wektor & operator -= (const Wektor & W2);
+      Wektor operator + (const Wektor & W2) const; //W1 + W2
+      Wektor operator - (const Wektor & W2) const;
       double operator * (const Wektor & W2) const; //skalarnie
-      const Wektor operator * (double l) const; // W1 * 2
-      const Wektor operator / (double l) const; // W1 / 2
+      Wektor operator * (double l) const; // W1 * 2
+      Wektor operator / (double l) const; // W1 / 2
 
       double dlugosc() const; //modul
 

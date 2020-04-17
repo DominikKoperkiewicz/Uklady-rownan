@@ -41,7 +41,16 @@
           return *this;
       }
 
-      const Wektor Wektor::operator + (const Wektor & W2) const
+      Wektor & Wektor::operator -= (const Wektor & W2)
+      {
+          for(int i = 0; i < ROZMIAR; i++)
+          {
+              this->tab[i] = this->tab[i] - W2.tab[i];
+          }
+          return *this;
+      }
+
+      Wektor Wektor::operator + (const Wektor & W2) const
       {
           Wektor wynik;
           for(int i = 0; i < ROZMIAR; i++)
@@ -52,7 +61,7 @@
           return wynik;
       }
 
-      const Wektor Wektor::operator - (const Wektor & W2) const
+      Wektor Wektor::operator - (const Wektor & W2) const
       {
           Wektor wynik;
           for(int i = 0; i < ROZMIAR; i++)
@@ -64,7 +73,7 @@
 
       double Wektor::operator * (const Wektor & W2) const
       {
-          double wynik;
+          double wynik = 0;
 
           for(int i = 0; i < ROZMIAR; i++)
           {
@@ -73,7 +82,7 @@
           return wynik;
       }
 
-      const Wektor Wektor::operator * (double l) const
+      Wektor Wektor::operator * (double l) const
       {
           Wektor wynik;
           for(int i = 0; i < ROZMIAR; i++)
@@ -83,7 +92,7 @@
           return wynik;
       }
 
-      const Wektor Wektor::operator / (double l) const
+      Wektor Wektor::operator / (double l) const
       {
           Wektor wynik;
           for(int i = 0; i < ROZMIAR; i++)
