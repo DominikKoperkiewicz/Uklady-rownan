@@ -3,151 +3,150 @@
 #include <iostream>
 
 /*
- *  Tutaj nalezy zdefiniowac odpowiednie metody
- *  klasy Wektor, ktore zawieraja wiecej kodu
- *  niz dwie linijki.
- *  Mniejsze metody mozna definiwac w ciele klasy.
- */
-      Wektor::Wektor()
-      {
-          //for(double x : this->tab) x = 0;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              this->tab[i] = 0;
-          }
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR>::Wektor(TYP tablica[])
+{
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        this->tab[i] = tablica[i];
+    }
+}
+*/
 
-      Wektor::Wektor(double x, double y, double z)
-      {
-          this->tab[0] = x;
-          this->tab[1] = y;
-          this->tab[2] = z;
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> & Wektor<TYP,ROZMIAR>::operator += (const Wektor<TYP,ROZMIAR> & W2)
+{
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        this->tab[i] = this->tab[i] + W2.tab[i];
+    }
 
-      Wektor::Wektor(double tablica[])
-      {
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              this->tab[i] = tablica[i];
-          }
-      }
+    return *this;
+}
 
-      Wektor & Wektor::operator += (const Wektor & W2)
-      {
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              this->tab[i] = this->tab[i] + W2.tab[i];
-          }
-          return *this;
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> & Wektor<TYP,ROZMIAR>::operator -= (const Wektor<TYP,ROZMIAR> & W2)
+{
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        this->tab[i] = this->tab[i] - W2.tab[i];
+    }
 
-      Wektor & Wektor::operator -= (const Wektor & W2)
-      {
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              this->tab[i] = this->tab[i] - W2.tab[i];
-          }
-          return *this;
-      }
+    return *this;
+}
 
-      Wektor Wektor::operator + (const Wektor & W2) const
-      {
-          Wektor wynik;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik.tab[i] = this->tab[i] + W2.tab[i];
-          }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> Wektor<TYP,ROZMIAR>::operator + (const Wektor<TYP,ROZMIAR> & W2) const
+{
+    Wektor<TYP,ROZMIAR> wynik;
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik.tab[i] = this->tab[i] + W2.tab[i];
+    }
 
-          return wynik;
-      }
+    return wynik;
+}
 
-      Wektor Wektor::operator - (const Wektor & W2) const
-      {
-          Wektor wynik;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik.tab[i] = this->tab[i] - W2.tab[i];
-          }
-          return wynik;
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> Wektor<TYP,ROZMIAR>::operator - (const Wektor<TYP,ROZMIAR> & W2) const
+{
+    Wektor<TYP,ROZMIAR> wynik;
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik.tab[i] = this->tab[i] - W2.tab[i];
+    }
+    return wynik;
+}
 
-      double Wektor::operator * (const Wektor & W2) const
-      {
-          double wynik = 0;
+template <typename TYP, int ROZMIAR>
+TYP Wektor<TYP,ROZMIAR>::operator * (const Wektor<TYP,ROZMIAR> & W2) const
+{
+    TYP wynik = 0;
 
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik += this->tab[i] * W2.tab[i];
-          }
-          return wynik;
-      }
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik += this->tab[i] * W2.tab[i];
+    }
+    return wynik;
+}
 
-      Wektor Wektor::operator * (double l) const
-      {
-          Wektor wynik;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik.tab[i] += this->tab[i] * l;
-          }
-          return wynik;
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> Wektor<TYP,ROZMIAR>::operator * (double l) const
+{
+    Wektor<TYP,ROZMIAR> wynik;
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik.tab[i] += this->tab[i] * l;
+    }
+    return wynik;
+}
 
-      Wektor Wektor::operator / (double l) const
-      {
-          Wektor wynik;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik.tab[i] += this->tab[i] / l;
-          }
-          return wynik;
-      }
+template <typename TYP, int ROZMIAR>
+Wektor<TYP,ROZMIAR> Wektor<TYP,ROZMIAR>::operator / (double l) const
+{
+    Wektor<TYP,ROZMIAR> wynik;
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik.tab[i] += this->tab[i] / l;
+    }
+    return wynik;
+}
 
-      double Wektor::dlugosc() const
-      {
-          double wynik;
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              wynik += this->tab[i]*this->tab[i];
-          }
-          return sqrt(wynik);
-      }
+template <typename TYP, int ROZMIAR>
+double Wektor<TYP,ROZMIAR>::dlugosc() const
+{
+    double wynik;
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        wynik += this->tab[i]*this->tab[i];
+    }
 
-      bool Wektor::operator == (const Wektor & W2) const
-      {
-          for(int i = 0; i < ROZMIAR; i++)
-          {
-              if( fabs(this->tab[i] - W2.tab[i]) > 0.00001 ) return false;
-          }
-          return true;
-      }
+    return sqrt(wynik);
+}
 
-      bool Wektor::operator != (const Wektor & W2) const
-      {
-          return !(*this == W2);
-      }
+template <typename TYP, int ROZMIAR>
+bool Wektor<TYP,ROZMIAR>::operator == (const Wektor<TYP,ROZMIAR> & W2) const
+{
+    for(int i = 0; i < ROZMIAR; i++)
+    {
+        if( fabs(this->tab[i] - W2.tab[i]) > 0.00001 ) return false;
+    }
+    return true;
+}
 
-        const double & Wektor::operator[] (int index) const
-        {
-            if (index < 0 || index > ROZMIAR)
-            {
-                std::cerr << "indeks poza zakresem\n";
-                exit(1);
-            }
-            return this->tab[index];
-        }
+template <typename TYP, int ROZMIAR>
+bool Wektor<TYP,ROZMIAR>::operator != (const Wektor<TYP,ROZMIAR> & W2) const
+{
+    return !(*this == W2);
+}
 
-        double & Wektor::operator[] (int index)
-        {
-            if (index < 0 || index > ROZMIAR)
-            {
-                std::cerr << "indeks poza zakresem\n";
-                exit(1);
-            }
-            return (this->tab[index]);
-        }
+template <typename TYP, int ROZMIAR>
+const TYP & Wektor<TYP,ROZMIAR>::operator[] (int index) const
+{
+    if (index < 0 || index > ROZMIAR)
+    {
+        std::cerr << "indeks poza zakresem\n";
+        exit(1);
+    }
+
+    return this->tab[index];
+}
+
+template <typename TYP, int ROZMIAR>
+TYP & Wektor<TYP,ROZMIAR>::operator[] (int index)
+{
+    if (index < 0 || index > ROZMIAR)
+    {
+        std::cerr << "indeks poza zakresem\n";
+        exit(1);
+    }
+
+    return (this->tab[index]);
+}
 
 
-std::istream& operator >> (std::istream &Strm, Wektor &Wek)
+template <typename TYP, int ROZMIAR>
+std::istream& operator >> (std::istream &Strm, Wektor<TYP,ROZMIAR> &Wek)
 {
 
     for(int i = 0; i < ROZMIAR; i++)
@@ -157,7 +156,8 @@ std::istream& operator >> (std::istream &Strm, Wektor &Wek)
     return Strm;
 }
 
-std::ostream& operator << (std::ostream &Strm, const Wektor &Wek)
+template <typename TYP, int ROZMIAR>
+std::ostream& operator << (std::ostream &Strm, const Wektor<TYP,ROZMIAR> &Wek)
 {
     Strm << "[" << Wek[0];
     for(int i = 1; i < ROZMIAR; i++)
@@ -167,3 +167,5 @@ std::ostream& operator << (std::ostream &Strm, const Wektor &Wek)
     Strm << "]";
     return Strm;
 }
+
+
